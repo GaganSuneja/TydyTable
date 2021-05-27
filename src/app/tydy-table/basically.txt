@@ -1,0 +1,20 @@
+basically 
+
+a abstraction which will keep all states sort order sort key filterKey,
+faker data,
+ui-alignment
+
+
+filter,sort,paginate
+
+
+tableState={
+    sortKey,sortOrder,filterKey,filterValues,pageLimit
+
+    onFilter() {
+        daal dunga,
+        viewData/20 limits -> pageCountButtonsLimits
+    }
+}
+
+filter = all 100 values;

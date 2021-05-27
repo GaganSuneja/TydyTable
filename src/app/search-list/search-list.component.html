@@ -1,0 +1,24 @@
+<div class="search-list-container">
+  <mat-form-field class="example-form-field">
+    <mat-label>Search</mat-label>
+    <input matInput style="color:black" type="text" [(ngModel)]="searchText" (ngModelChange)="onSearchTextChange()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+<div class="item-list">
+  <mat-selection-list >
+      <mat-list-item>
+        <mat-checkbox class="example-margin" (change)="onSelectChange($event)" [(ngModel)]="selectAll">Select All
+        </mat-checkbox>
+      </mat-list-item>
+      <mat-list-item *ngFor="let data of viewList">
+        <mat-checkbox class="example-margin"  (change)="onElementCheck
+        ({event:$event,dataElem:data})" [(ngModel)]="data.isActive"> 
+         {{isElemTypeDate? (data.value | date:'dd MM YYYY') : data.value}}
+        </mat-checkbox>
+      </mat-list-item>
+  </mat-selection-list>
+</div>
+<button mat-raised-button color="primary" (click)="filter()" [disabled]="selectItems.length===0">Filter</button>
+</div>

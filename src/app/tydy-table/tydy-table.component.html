@@ -1,0 +1,56 @@
+    <mat-card class="example-card">
+      <mat-card-content>
+        <h2 class="example-h2">check uncheck to show/hide column </h2>
+        <section class="example-section">
+          <ng-container *ngFor="let head of _tableHeads">
+            <mat-checkbox class="example-margin" [(ngModel)]="head.isActive" 
+            (ngModelChange)="selectedColumns(head.isActive,head.key)">
+              {{head.header}}
+            </mat-checkbox>
+          </ng-container>
+        </section>
+      </mat-card-content>
+    </mat-card>
+    <div class="table-action">
+      <div style="display: inline-block;">
+        <button mat-raised-button color="primary"  [disabled]="pageNo === 1" (click)="decPageNo()">-</button>
+       
+        <div style="margin: 10px 10px;display:inline-block">
+          {{pageNo}}
+        </div>
+       
+        <button mat-raised-button color="primary" [disabled]="pageNo === pageMax" (click)="incPageNo()">+</button>
+      </div>
+      <div style="margin: 20px 10px">
+        <button mat-raised-button color="primary"  (click)="downloadCsv()">Download Csv </button>
+      </div>
+    </div>
+    <div style="position:relative">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <ng-container *ngFor="let head of _tableHeads">
+              <th *ngIf="head.isActive" ><span>{{head.header}}</span>
+                <mat-icon aria-hidden="false" (click)="filterColumn !== head.key && sort(head.key,'asc')">arrow_upward</mat-icon>
+                <mat-icon aria-hidden="false" (click)="filterColumn !== head.key && sort(head.key,'desc')">arrow_downward</mat-icon>
+                <mat-icon aria-hidden="false" (click)="toggleFilter(head.key)">
+                  filter_list</mat-icon>
+                <app-search-list *ngIf="filterColumn === head.key" [key]="head.key"
+                  [isElemTypeDate]="head.key === 'dob'" (onFilter)="filter($event)" [dataList]="_columnData[head.key]">
+                </app-search-list>
+              </th>
+            </ng-container>
+          </tr>
+        </thead>
+
+        <tbody class="scrollable">
+          <tr *ngFor="let row of _viewData">
+            <ng-container *ngFor="let head of _tableHeads">
+              <td *ngIf="head.isActive">
+                {{ head.key === 'dob'? (row[head.key] | date:'dd MM YYYY'): (row[head.key])}}
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>

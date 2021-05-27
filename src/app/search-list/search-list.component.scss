@@ -1,0 +1,14 @@
+.search-list-container {
+    position:absolute;
+    z-index:10000;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #00000045;
+    padding: 20px;
+    max-height: 315px;
+}
+
+.item-list {
+    max-height: 200px;
+    overflow-y: scroll;
+}
